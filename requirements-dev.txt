@@ -1,0 +1,6 @@
+black==24.4.2
+mypy==1.10.0
+pylint==3.2.3
+coverage>=6.5.0,<7
+twine
+aas-core-codegen@git+https://github.com/aas-core-works/aas-core-codegen@136118c#egg=aas-core-codegen
