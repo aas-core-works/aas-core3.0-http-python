@@ -5764,8 +5764,8 @@ class _Transformer(aas_types.AbstractTransformer[Iterator[Error]]):
             yield error
 
     # noinspection PyMethodMayBeStatic
-    def transform_get_asset_administration_shell_result(
-        self, that: aas_types.GetAssetAdministrationShellResult
+    def transform_get_asset_administration_shells_result(
+        self, that: aas_types.GetAssetAdministrationShellsResult
     ) -> Iterator[Error]:
         for error in self.transform(that.paging_metadata):
             error.path._prepend(PropertySegment(that, "paging_metadata"))

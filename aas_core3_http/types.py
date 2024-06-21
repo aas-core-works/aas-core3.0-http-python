@@ -6054,7 +6054,7 @@ class PagedResult(Class):
         self.paging_metadata = paging_metadata
 
 
-class GetAssetAdministrationShellResult(PagedResult):
+class GetAssetAdministrationShellsResult(PagedResult):
     """Represent the listing of asset administration shells."""
 
     result: List["AssetAdministrationShell"]
@@ -6088,17 +6088,17 @@ class GetAssetAdministrationShellResult(PagedResult):
 
     def accept(self, visitor: "AbstractVisitor") -> None:
         """Dispatch the :paramref:`visitor` on this instance."""
-        visitor.visit_get_asset_administration_shell_result(self)
+        visitor.visit_get_asset_administration_shells_result(self)
 
     def accept_with_context(
         self, visitor: "AbstractVisitorWithContext[ContextT]", context: ContextT
     ) -> None:
         """Dispatch the :paramref:`visitor` on this instance in :paramref:`context`."""
-        visitor.visit_get_asset_administration_shell_result_with_context(self, context)
+        visitor.visit_get_asset_administration_shells_result_with_context(self, context)
 
     def transform(self, transformer: "AbstractTransformer[T]") -> T:
         """Dispatch the :paramref:`transformer` on this instance."""
-        return transformer.transform_get_asset_administration_shell_result(self)
+        return transformer.transform_get_asset_administration_shells_result(self)
 
     def transform_with_context(
         self,
@@ -6108,8 +6108,10 @@ class GetAssetAdministrationShellResult(PagedResult):
         """
         Dispatch the :paramref:`transformer` on this instance in :paramref:`context`.
         """
-        return transformer.transform_get_asset_administration_shell_result_with_context(
-            self, context
+        return (
+            transformer.transform_get_asset_administration_shells_result_with_context(
+                self, context
+            )
         )
 
     def __init__(
@@ -6555,8 +6557,8 @@ class AbstractVisitor:
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def visit_get_asset_administration_shell_result(
-        self, that: GetAssetAdministrationShellResult
+    def visit_get_asset_administration_shells_result(
+        self, that: GetAssetAdministrationShellsResult
     ) -> None:
         """Visit :paramref:`that`."""
         raise NotImplementedError()
@@ -6830,8 +6832,8 @@ class AbstractVisitorWithContext(Generic[ContextT]):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def visit_get_asset_administration_shell_result_with_context(
-        self, that: GetAssetAdministrationShellResult, context: ContextT
+    def visit_get_asset_administration_shells_result_with_context(
+        self, that: GetAssetAdministrationShellsResult, context: ContextT
     ) -> None:
         """Visit :paramref:`that` in :paramref:`context`."""
         raise NotImplementedError()
@@ -7077,8 +7079,8 @@ class PassThroughVisitor(AbstractVisitor):
         for another in that.descend_once():
             self.visit(another)
 
-    def visit_get_asset_administration_shell_result(
-        self, that: GetAssetAdministrationShellResult
+    def visit_get_asset_administration_shells_result(
+        self, that: GetAssetAdministrationShellsResult
     ) -> None:
         """Visit :paramref:`that`."""
         for another in that.descend_once():
@@ -7357,8 +7359,8 @@ class PassThroughVisitorWithContext(AbstractVisitorWithContext[ContextT]):
         for another in that.descend_once():
             self.visit_with_context(another, context)
 
-    def visit_get_asset_administration_shell_result_with_context(
-        self, that: GetAssetAdministrationShellResult, context: ContextT
+    def visit_get_asset_administration_shells_result_with_context(
+        self, that: GetAssetAdministrationShellsResult, context: ContextT
     ) -> None:
         """Visit :paramref:`that` in :paramref:`context`."""
         for another in that.descend_once():
@@ -7603,8 +7605,8 @@ class AbstractTransformer(Generic[T]):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def transform_get_asset_administration_shell_result(
-        self, that: GetAssetAdministrationShellResult
+    def transform_get_asset_administration_shells_result(
+        self, that: GetAssetAdministrationShellsResult
     ) -> T:
         """Transform :paramref:`that`."""
         raise NotImplementedError()
@@ -7882,8 +7884,8 @@ class AbstractTransformerWithContext(Generic[ContextT, T]):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def transform_get_asset_administration_shell_result_with_context(
-        self, that: GetAssetAdministrationShellResult, context: ContextT
+    def transform_get_asset_administration_shells_result_with_context(
+        self, that: GetAssetAdministrationShellsResult, context: ContextT
     ) -> T:
         """Transform :paramref:`that` in :paramref:`context`."""
         raise NotImplementedError()
@@ -8099,8 +8101,8 @@ class TransformerWithDefault(AbstractTransformer[T]):
         """Transform :paramref:`that`."""
         return self.default
 
-    def transform_get_asset_administration_shell_result(
-        self, that: GetAssetAdministrationShellResult
+    def transform_get_asset_administration_shells_result(
+        self, that: GetAssetAdministrationShellsResult
     ) -> T:
         """Transform :paramref:`that`."""
         return self.default
@@ -8347,8 +8349,8 @@ class TransformerWithDefaultAndContext(AbstractTransformerWithContext[ContextT, 
         """Transform :paramref:`that` in :paramref:`context`."""
         return self.default
 
-    def transform_get_asset_administration_shell_result_with_context(
-        self, that: GetAssetAdministrationShellResult, context: ContextT
+    def transform_get_asset_administration_shells_result_with_context(
+        self, that: GetAssetAdministrationShellsResult, context: ContextT
     ) -> T:
         """Transform :paramref:`that` in :paramref:`context`."""
         return self.default

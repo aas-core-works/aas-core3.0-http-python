@@ -9443,11 +9443,11 @@ def paged_result_from_str(
     return paged_result_from_iterparse(_with_elements_cleared_after_yield(iterator))
 
 
-def get_asset_administration_shell_result_from_iterparse(
+def get_asset_administration_shells_result_from_iterparse(
     iterator: Iterator[Tuple[str, Element]]
-) -> aas_types.GetAssetAdministrationShellResult:
+) -> aas_types.GetAssetAdministrationShellsResult:
     """
-    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult` from
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellsResult` from
     the :paramref:`iterator`.
 
     Example usage:
@@ -9465,7 +9465,7 @@ def get_asset_administration_shell_result_from_iterparse(
                 source=fid,
                 events=['start', 'end']
             )
-            instance = aas_xmlization.get_asset_administration_shell_result_from_iterparse(
+            instance = aas_xmlization.get_asset_administration_shells_result_from_iterparse(
                 iterator
             )
 
@@ -9477,14 +9477,14 @@ def get_asset_administration_shell_result_from_iterparse(
         ``events=["start", "end"]``
     :raise: :py:class:`DeserializationException` if unexpected input
     :return:
-        Instance of :py:class:`.types.GetAssetAdministrationShellResult` read from
+        Instance of :py:class:`.types.GetAssetAdministrationShellsResult` read from
         :paramref:`iterator`
     """
     next_event_element = next(iterator, None)
     if next_event_element is None:
         raise DeserializationException(
             # fmt: off
-            "Expected the start element for GetAssetAdministrationShellResult, "
+            "Expected the start element for GetAssetAdministrationShellsResult, "
             "but got the end-of-input"
             # fmt: on
         )
@@ -9492,12 +9492,12 @@ def get_asset_administration_shell_result_from_iterparse(
     next_event, next_element = next_event_element
     if next_event != "start":
         raise DeserializationException(
-            f"Expected the start element for GetAssetAdministrationShellResult, "
+            f"Expected the start element for GetAssetAdministrationShellsResult, "
             f"but got event {next_event!r} and element {next_element.tag!r}"
         )
 
     try:
-        return _read_get_asset_administration_shell_result_as_element(
+        return _read_get_asset_administration_shells_result_as_element(
             next_element, iterator
         )
     except DeserializationException as exception:
@@ -9505,11 +9505,11 @@ def get_asset_administration_shell_result_from_iterparse(
         raise exception
 
 
-def get_asset_administration_shell_result_from_stream(
+def get_asset_administration_shells_result_from_stream(
     stream: TextIO, has_iterparse: HasIterparse = xml.etree.ElementTree
-) -> aas_types.GetAssetAdministrationShellResult:
+) -> aas_types.GetAssetAdministrationShellsResult:
     """
-    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult` from
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellsResult` from
     the :paramref:`stream`.
 
     Example usage:
@@ -9519,7 +9519,7 @@ def get_asset_administration_shell_result_from_stream(
         import aas_core3_http.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
-            instance = aas_xmlization.get_asset_administration_shell_result_from_stream(
+            instance = aas_xmlization.get_asset_administration_shells_result_from_stream(
                 stream
             )
 
@@ -9527,7 +9527,7 @@ def get_asset_administration_shell_result_from_stream(
 
     :param stream:
         representing an instance of
-        :py:class:`.types.GetAssetAdministrationShellResult` in XML
+        :py:class:`.types.GetAssetAdministrationShellsResult` in XML
     :param has_iterparse:
         Module containing ``iterparse`` function.
 
@@ -9536,20 +9536,20 @@ def get_asset_administration_shell_result_from_stream(
         a library such as `defusedxml.ElementTree`_.
     :raise: :py:class:`DeserializationException` if unexpected input
     :return:
-        Instance of :py:class:`.types.GetAssetAdministrationShellResult` read from
+        Instance of :py:class:`.types.GetAssetAdministrationShellsResult` read from
         :paramref:`stream`
     """
     iterator = has_iterparse.iterparse(stream, ["start", "end"])
-    return get_asset_administration_shell_result_from_iterparse(
+    return get_asset_administration_shells_result_from_iterparse(
         _with_elements_cleared_after_yield(iterator)
     )
 
 
-def get_asset_administration_shell_result_from_file(
+def get_asset_administration_shells_result_from_file(
     path: PathLike, has_iterparse: HasIterparse = xml.etree.ElementTree
-) -> aas_types.GetAssetAdministrationShellResult:
+) -> aas_types.GetAssetAdministrationShellsResult:
     """
-    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult` from
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellsResult` from
     the :paramref:`path`.
 
     Example usage:
@@ -9560,7 +9560,7 @@ def get_asset_administration_shell_result_from_file(
         import aas_core3_http.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
-        instance = aas_xmlization.get_asset_administration_shell_result_from_file(
+        instance = aas_xmlization.get_asset_administration_shells_result_from_file(
             path
         )
 
@@ -9568,7 +9568,7 @@ def get_asset_administration_shell_result_from_file(
 
     :param path:
         to the file representing an instance of
-        :py:class:`.types.GetAssetAdministrationShellResult` in XML
+        :py:class:`.types.GetAssetAdministrationShellsResult` in XML
     :param has_iterparse:
         Module containing ``iterparse`` function.
 
@@ -9577,21 +9577,21 @@ def get_asset_administration_shell_result_from_file(
         a library such as `defusedxml.ElementTree`_.
     :raise: :py:class:`DeserializationException` if unexpected input
     :return:
-        Instance of :py:class:`.types.GetAssetAdministrationShellResult` read from
+        Instance of :py:class:`.types.GetAssetAdministrationShellsResult` read from
         :paramref:`path`
     """
     with open(os.fspath(path), "rt", encoding="utf-8") as fid:
         iterator = has_iterparse.iterparse(fid, ["start", "end"])
-        return get_asset_administration_shell_result_from_iterparse(
+        return get_asset_administration_shells_result_from_iterparse(
             _with_elements_cleared_after_yield(iterator)
         )
 
 
-def get_asset_administration_shell_result_from_str(
+def get_asset_administration_shells_result_from_str(
     text: str, has_iterparse: HasIterparse = xml.etree.ElementTree
-) -> aas_types.GetAssetAdministrationShellResult:
+) -> aas_types.GetAssetAdministrationShellsResult:
     """
-    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult` from
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellsResult` from
     the :paramref:`text`.
 
     Example usage:
@@ -9602,7 +9602,7 @@ def get_asset_administration_shell_result_from_str(
         import aas_core3_http.xmlization as aas_xmlization
 
         text = "<...>...</...>"
-        instance = aas_xmlization.get_asset_administration_shell_result_from_str(
+        instance = aas_xmlization.get_asset_administration_shells_result_from_str(
             text
         )
 
@@ -9610,7 +9610,7 @@ def get_asset_administration_shell_result_from_str(
 
     :param text:
         representing an instance of
-        :py:class:`.types.GetAssetAdministrationShellResult` in XML
+        :py:class:`.types.GetAssetAdministrationShellsResult` in XML
     :param has_iterparse:
         Module containing ``iterparse`` function.
 
@@ -9619,11 +9619,11 @@ def get_asset_administration_shell_result_from_str(
         a library such as `defusedxml.ElementTree`_.
     :raise: :py:class:`DeserializationException` if unexpected input
     :return:
-        Instance of :py:class:`.types.GetAssetAdministrationShellResult` read from
+        Instance of :py:class:`.types.GetAssetAdministrationShellsResult` read from
         :paramref:`text`
     """
     iterator = has_iterparse.iterparse(io.StringIO(text), ["start", "end"])
-    return get_asset_administration_shell_result_from_iterparse(
+    return get_asset_administration_shells_result_from_iterparse(
         _with_elements_cleared_after_yield(iterator)
     )
 
@@ -23457,13 +23457,13 @@ def _read_paged_result_as_element(
     return read_as_sequence(element, iterator)
 
 
-class _ReaderAndSetterForGetAssetAdministrationShellResult:
+class _ReaderAndSetterForGetAssetAdministrationShellsResult:
     """
     Provide a buffer for reading and setting the properties for the class
-    :py:class:`GetAssetAdministrationShellResult`.
+    :py:class:`GetAssetAdministrationShellsResult`.
 
     The properties correspond to the constructor arguments of
-    :py:class:`GetAssetAdministrationShellResult`. We use this buffer to facilitate dispatching when
+    :py:class:`GetAssetAdministrationShellsResult`. We use this buffer to facilitate dispatching when
     parsing the properties in a streaming fashion.
     """
 
@@ -23477,7 +23477,7 @@ class _ReaderAndSetterForGetAssetAdministrationShellResult:
     ) -> None:
         """
         Read :paramref:`element` as the property
-        :py:attr:`.types.GetAssetAdministrationShellResult.paging_metadata` and set it.
+        :py:attr:`.types.GetAssetAdministrationShellsResult.paging_metadata` and set it.
         """
         self.paging_metadata = _read_paged_result_paging_metadata_as_sequence(
             element, iterator
@@ -23488,7 +23488,7 @@ class _ReaderAndSetterForGetAssetAdministrationShellResult:
     ) -> None:
         """
         Read :paramref:`element` as the property
-        :py:attr:`.types.GetAssetAdministrationShellResult.result` and set it.
+        :py:attr:`.types.GetAssetAdministrationShellsResult.result` and set it.
         """
         if element.text is not None and len(element.text.strip()) != 0:
             raise DeserializationException(
@@ -23533,11 +23533,11 @@ class _ReaderAndSetterForGetAssetAdministrationShellResult:
         self.result = result
 
 
-def _read_get_asset_administration_shell_result_as_sequence(
+def _read_get_asset_administration_shells_result_as_sequence(
     element: Element, iterator: Iterator[Tuple[str, Element]]
-) -> aas_types.GetAssetAdministrationShellResult:
+) -> aas_types.GetAssetAdministrationShellsResult:
     """
-    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult`
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellsResult`
     as a sequence of XML-encoded properties.
 
     The end element corresponding to the :paramref:`element` will be
@@ -23559,7 +23559,7 @@ def _read_get_asset_administration_shell_result_as_sequence(
 
     _raise_if_has_tail_or_attrib(element)
 
-    reader_and_setter = _ReaderAndSetterForGetAssetAdministrationShellResult()
+    reader_and_setter = _ReaderAndSetterForGetAssetAdministrationShellsResult()
 
     while True:
         next_event_element = next(iterator, None)
@@ -23587,7 +23587,7 @@ def _read_get_asset_administration_shell_result_as_sequence(
             raise
 
         read_and_set_method = (
-            _READ_AND_SET_DISPATCH_FOR_GET_ASSET_ADMINISTRATION_SHELL_RESULT.get(
+            _READ_AND_SET_DISPATCH_FOR_GET_ASSET_ADMINISTRATION_SHELLS_RESULT.get(
                 tag_wo_ns, None
             )
         )
@@ -23613,16 +23613,16 @@ def _read_get_asset_administration_shell_result_as_sequence(
     if reader_and_setter.result is None:
         raise DeserializationException("The required property 'result' is missing")
 
-    return aas_types.GetAssetAdministrationShellResult(
+    return aas_types.GetAssetAdministrationShellsResult(
         reader_and_setter.paging_metadata, reader_and_setter.result
     )
 
 
-def _read_get_asset_administration_shell_result_as_element(
+def _read_get_asset_administration_shells_result_as_element(
     element: Element, iterator: Iterator[Tuple[str, Element]]
-) -> aas_types.GetAssetAdministrationShellResult:
+) -> aas_types.GetAssetAdministrationShellsResult:
     """
-    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult` from
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellsResult` from
     :paramref:`iterator`, including the end element.
 
     :param element: start element
@@ -23635,13 +23635,13 @@ def _read_get_asset_administration_shell_result_as_element(
     """
     tag_wo_ns = _parse_element_tag(element)
 
-    if tag_wo_ns != "getAssetAdministrationShellResult":
+    if tag_wo_ns != "getAssetAdministrationShellsResult":
         raise DeserializationException(
-            f"Expected the element with the tag 'getAssetAdministrationShellResult', "
+            f"Expected the element with the tag 'getAssetAdministrationShellsResult', "
             f"but got tag: {tag_wo_ns}"
         )
 
-    return _read_get_asset_administration_shell_result_as_sequence(element, iterator)
+    return _read_get_asset_administration_shells_result_as_sequence(element, iterator)
 
 
 class _ReaderAndSetterForGetSubmodelResult:
@@ -25188,7 +25188,7 @@ _DISPATCH_FOR_PAGED_RESULT: Mapping[
     str, Callable[[Element, Iterator[Tuple[str, Element]]], aas_types.PagedResult]
 ] = {
     "pagedResult": _read_paged_result_as_sequence,
-    "getAssetAdministrationShellResult": _read_get_asset_administration_shell_result_as_sequence,
+    "getAssetAdministrationShellsResult": _read_get_asset_administration_shells_result_as_sequence,
     "getSubmodelResult": _read_get_submodel_result_as_sequence,
 }
 
@@ -25206,20 +25206,20 @@ _READ_AND_SET_DISPATCH_FOR_PAGED_RESULT: Mapping[
 
 
 #: Dispatch XML property name to read & set method in
-#: :py:class:`_ReaderAndSetterForGetAssetAdministrationShellResult`
-_READ_AND_SET_DISPATCH_FOR_GET_ASSET_ADMINISTRATION_SHELL_RESULT: Mapping[
+#: :py:class:`_ReaderAndSetterForGetAssetAdministrationShellsResult`
+_READ_AND_SET_DISPATCH_FOR_GET_ASSET_ADMINISTRATION_SHELLS_RESULT: Mapping[
     str,
     Callable[
         [
-            _ReaderAndSetterForGetAssetAdministrationShellResult,
+            _ReaderAndSetterForGetAssetAdministrationShellsResult,
             Element,
             Iterator[Tuple[str, Element]],
         ],
         None,
     ],
 ] = {
-    "pagingMetadata": _ReaderAndSetterForGetAssetAdministrationShellResult.read_and_set_paging_metadata,
-    "result": _ReaderAndSetterForGetAssetAdministrationShellResult.read_and_set_result,
+    "pagingMetadata": _ReaderAndSetterForGetAssetAdministrationShellsResult.read_and_set_paging_metadata,
+    "result": _ReaderAndSetterForGetAssetAdministrationShellsResult.read_and_set_result,
 }
 
 
@@ -28178,8 +28178,8 @@ class _Serializer(aas_types.AbstractVisitor):
         self._write_paged_result_as_sequence(that)
         self._write_end_element("pagedResult")
 
-    def _write_get_asset_administration_shell_result_as_sequence(
-        self, that: aas_types.GetAssetAdministrationShellResult
+    def _write_get_asset_administration_shells_result_as_sequence(
+        self, that: aas_types.GetAssetAdministrationShellsResult
     ) -> None:
         """
         Serialize :paramref:`that` to :py:attr:`~stream` as a sequence of
@@ -28202,8 +28202,8 @@ class _Serializer(aas_types.AbstractVisitor):
                 self.visit(an_item)
             self._write_end_element("result")
 
-    def visit_get_asset_administration_shell_result(
-        self, that: aas_types.GetAssetAdministrationShellResult
+    def visit_get_asset_administration_shells_result(
+        self, that: aas_types.GetAssetAdministrationShellsResult
     ) -> None:
         """
         Serialize :paramref:`that` to :py:attr:`~stream` as an XML element.
@@ -28213,9 +28213,9 @@ class _Serializer(aas_types.AbstractVisitor):
 
         :param that: instance to be serialized
         """
-        self._write_start_element("getAssetAdministrationShellResult")
-        self._write_get_asset_administration_shell_result_as_sequence(that)
-        self._write_end_element("getAssetAdministrationShellResult")
+        self._write_start_element("getAssetAdministrationShellsResult")
+        self._write_get_asset_administration_shells_result_as_sequence(that)
+        self._write_end_element("getAssetAdministrationShellsResult")
 
     def _write_get_submodel_result_as_sequence(
         self, that: aas_types.GetSubmodelResult

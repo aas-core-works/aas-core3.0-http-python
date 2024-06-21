@@ -7302,7 +7302,7 @@ def _paged_result_from_jsonable_without_dispatch(
     return aas_types.PagedResult(setter.paging_metadata)
 
 
-class _SetterForGetAssetAdministrationShellResult:
+class _SetterForGetAssetAdministrationShellsResult:
     """Provide de-serialization-setters for properties."""
 
     def __init__(self) -> None:
@@ -7346,24 +7346,24 @@ class _SetterForGetAssetAdministrationShellResult:
         self.result = items
 
 
-def get_asset_administration_shell_result_from_jsonable(
+def get_asset_administration_shells_result_from_jsonable(
     jsonable: Jsonable,
-) -> aas_types.GetAssetAdministrationShellResult:
+) -> aas_types.GetAssetAdministrationShellsResult:
     """
-    Parse an instance of :py:class:`.types.GetAssetAdministrationShellResult` from the JSON-able
+    Parse an instance of :py:class:`.types.GetAssetAdministrationShellsResult` from the JSON-able
     structure :paramref:`jsonable`.
 
     :param jsonable: structure to be parsed
-    :return: Parsed instance of :py:class:`.types.GetAssetAdministrationShellResult`
+    :return: Parsed instance of :py:class:`.types.GetAssetAdministrationShellsResult`
     :raise: :py:class:`DeserializationException` if unexpected :paramref:`jsonable`
     """
     if not isinstance(jsonable, collections.abc.Mapping):
         raise DeserializationException(f"Expected a mapping, but got: {type(jsonable)}")
 
-    setter = _SetterForGetAssetAdministrationShellResult()
+    setter = _SetterForGetAssetAdministrationShellsResult()
 
     for key, jsonable_value in jsonable.items():
-        setter_method = _SETTER_MAP_FOR_GET_ASSET_ADMINISTRATION_SHELL_RESULT.get(key)
+        setter_method = _SETTER_MAP_FOR_GET_ASSET_ADMINISTRATION_SHELLS_RESULT.get(key)
         if setter_method is None:
             raise DeserializationException(f"Unexpected property: {key}")
 
@@ -7381,7 +7381,7 @@ def get_asset_administration_shell_result_from_jsonable(
     if setter.result is None:
         raise DeserializationException("The required property 'result' is missing")
 
-    return aas_types.GetAssetAdministrationShellResult(
+    return aas_types.GetAssetAdministrationShellsResult(
         setter.paging_metadata, setter.result
     )
 
@@ -8393,7 +8393,7 @@ _PAGED_RESULT_FROM_JSONABLE_DISPATCH: Mapping[
     str, Callable[[Jsonable], aas_types.PagedResult]
 ] = {
     "PagedResult": _paged_result_from_jsonable_without_dispatch,
-    "GetAssetAdministrationShellResult": get_asset_administration_shell_result_from_jsonable,
+    "GetAssetAdministrationShellsResult": get_asset_administration_shells_result_from_jsonable,
     "GetSubmodelResult": get_submodel_result_from_jsonable,
 }
 
@@ -8406,12 +8406,12 @@ _SETTER_MAP_FOR_PAGED_RESULT: Mapping[
 }
 
 
-_SETTER_MAP_FOR_GET_ASSET_ADMINISTRATION_SHELL_RESULT: Mapping[
-    str, Callable[[_SetterForGetAssetAdministrationShellResult, Jsonable], None]
+_SETTER_MAP_FOR_GET_ASSET_ADMINISTRATION_SHELLS_RESULT: Mapping[
+    str, Callable[[_SetterForGetAssetAdministrationShellsResult, Jsonable], None]
 ] = {
-    "pagingMetadata": _SetterForGetAssetAdministrationShellResult.set_paging_metadata_from_jsonable,
-    "result": _SetterForGetAssetAdministrationShellResult.set_result_from_jsonable,
-    "modelType": _SetterForGetAssetAdministrationShellResult.ignore,
+    "pagingMetadata": _SetterForGetAssetAdministrationShellsResult.set_paging_metadata_from_jsonable,
+    "result": _SetterForGetAssetAdministrationShellsResult.set_result_from_jsonable,
+    "modelType": _SetterForGetAssetAdministrationShellsResult.ignore,
 }
 
 
@@ -9720,8 +9720,8 @@ class _Serializer(aas_types.AbstractTransformer[MutableJsonable]):
 
         return jsonable
 
-    def transform_get_asset_administration_shell_result(
-        self, that: aas_types.GetAssetAdministrationShellResult
+    def transform_get_asset_administration_shells_result(
+        self, that: aas_types.GetAssetAdministrationShellsResult
     ) -> MutableJsonable:
         """Serialize :paramref:`that` to a JSON-able representation."""
         jsonable: MutableMapping[str, MutableJsonable] = dict()
