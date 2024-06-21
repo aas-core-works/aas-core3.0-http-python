@@ -12,6 +12,8 @@ def generate() -> None:
     snippets_dir = this_dir / "snippets"
     meta_model_path = this_dir / "meta_model.py"
 
+    target_dir = this_dir.parent.parent / "aas_core3_http"
+
     cmd = [
         sys.executable,
         "-m",
@@ -21,12 +23,14 @@ def generate() -> None:
         "--snippets_dir",
         str(snippets_dir),
         "--output_dir",
-        str(this_dir.parent.parent / "aas_core3_http"),
+        str(target_dir),
         "--target",
         "python"
     ]
 
     subprocess.check_call(cmd, cwd=str(this_dir))
+
+    subprocess.check_call(["black", str(target_dir), "--quiet"])
 
 def main() -> int:
     """Execute the main routine."""

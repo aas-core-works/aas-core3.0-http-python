@@ -1,5 +1,5 @@
 """
-Handle data structures for the HTTP API of the Asset Administration Shell (AAS) V3.0.
+Handle data structures for the Asset Administration Shell (AAS) V3.0 over HTTP.
 
 Specifically, we provide additional data structures required for AAS API over HTTP.
 
@@ -4630,7 +4630,7 @@ class Key_types(Enum):
     """Enumeration of different key value types within a key."""
 
     Annotated_relationship_element = "AnnotatedRelationshipElement"
-    Asset_administration_shell = "AssetAdministrationShell"
+    Asset_administration_shell = "Asset_administration_shell"
     Basic_event_element = "BasicEventElement"
     Blob = "Blob"
     Capability = "Capability"
@@ -5591,8 +5591,6 @@ class Paged_result_paging_metadata:
         self.cursor = cursor
 
 
-# TODO (mristin, 2024-06-21): update the docstrings to match the book!
-
 @serialization(with_model_type=False)
 class Paged_result:
     """Represent an answer from the server split across pages."""
@@ -5602,7 +5600,7 @@ class Paged_result:
     def __init__(self, paging_metadata: Paged_result_paging_metadata) -> None:
         self.paging_metadata = paging_metadata
 
-class Get_asset_administration_shell_result(Paged_result):
+class Get_shell_result(Paged_result):
     """Represent the listing of asset administration shells."""
 
     result: List[Asset_administration_shell]
