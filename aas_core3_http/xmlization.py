@@ -9443,11 +9443,11 @@ def paged_result_from_str(
     return paged_result_from_iterparse(_with_elements_cleared_after_yield(iterator))
 
 
-def get_shell_result_from_iterparse(
+def get_asset_administration_shell_result_from_iterparse(
     iterator: Iterator[Tuple[str, Element]]
-) -> aas_types.GetShellResult:
+) -> aas_types.GetAssetAdministrationShellResult:
     """
-    Read an instance of :py:class:`.types.GetShellResult` from
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult` from
     the :paramref:`iterator`.
 
     Example usage:
@@ -9465,7 +9465,7 @@ def get_shell_result_from_iterparse(
                 source=fid,
                 events=['start', 'end']
             )
-            instance = aas_xmlization.get_shell_result_from_iterparse(
+            instance = aas_xmlization.get_asset_administration_shell_result_from_iterparse(
                 iterator
             )
 
@@ -9477,14 +9477,14 @@ def get_shell_result_from_iterparse(
         ``events=["start", "end"]``
     :raise: :py:class:`DeserializationException` if unexpected input
     :return:
-        Instance of :py:class:`.types.GetShellResult` read from
+        Instance of :py:class:`.types.GetAssetAdministrationShellResult` read from
         :paramref:`iterator`
     """
     next_event_element = next(iterator, None)
     if next_event_element is None:
         raise DeserializationException(
             # fmt: off
-            "Expected the start element for GetShellResult, "
+            "Expected the start element for GetAssetAdministrationShellResult, "
             "but got the end-of-input"
             # fmt: on
         )
@@ -9492,22 +9492,24 @@ def get_shell_result_from_iterparse(
     next_event, next_element = next_event_element
     if next_event != "start":
         raise DeserializationException(
-            f"Expected the start element for GetShellResult, "
+            f"Expected the start element for GetAssetAdministrationShellResult, "
             f"but got event {next_event!r} and element {next_element.tag!r}"
         )
 
     try:
-        return _read_get_shell_result_as_element(next_element, iterator)
+        return _read_get_asset_administration_shell_result_as_element(
+            next_element, iterator
+        )
     except DeserializationException as exception:
         exception.path._prepend(ElementSegment(next_element))
         raise exception
 
 
-def get_shell_result_from_stream(
+def get_asset_administration_shell_result_from_stream(
     stream: TextIO, has_iterparse: HasIterparse = xml.etree.ElementTree
-) -> aas_types.GetShellResult:
+) -> aas_types.GetAssetAdministrationShellResult:
     """
-    Read an instance of :py:class:`.types.GetShellResult` from
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult` from
     the :paramref:`stream`.
 
     Example usage:
@@ -9517,7 +9519,7 @@ def get_shell_result_from_stream(
         import aas_core3_http.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
-            instance = aas_xmlization.get_shell_result_from_stream(
+            instance = aas_xmlization.get_asset_administration_shell_result_from_stream(
                 stream
             )
 
@@ -9525,7 +9527,7 @@ def get_shell_result_from_stream(
 
     :param stream:
         representing an instance of
-        :py:class:`.types.GetShellResult` in XML
+        :py:class:`.types.GetAssetAdministrationShellResult` in XML
     :param has_iterparse:
         Module containing ``iterparse`` function.
 
@@ -9534,18 +9536,20 @@ def get_shell_result_from_stream(
         a library such as `defusedxml.ElementTree`_.
     :raise: :py:class:`DeserializationException` if unexpected input
     :return:
-        Instance of :py:class:`.types.GetShellResult` read from
+        Instance of :py:class:`.types.GetAssetAdministrationShellResult` read from
         :paramref:`stream`
     """
     iterator = has_iterparse.iterparse(stream, ["start", "end"])
-    return get_shell_result_from_iterparse(_with_elements_cleared_after_yield(iterator))
+    return get_asset_administration_shell_result_from_iterparse(
+        _with_elements_cleared_after_yield(iterator)
+    )
 
 
-def get_shell_result_from_file(
+def get_asset_administration_shell_result_from_file(
     path: PathLike, has_iterparse: HasIterparse = xml.etree.ElementTree
-) -> aas_types.GetShellResult:
+) -> aas_types.GetAssetAdministrationShellResult:
     """
-    Read an instance of :py:class:`.types.GetShellResult` from
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult` from
     the :paramref:`path`.
 
     Example usage:
@@ -9556,7 +9560,7 @@ def get_shell_result_from_file(
         import aas_core3_http.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
-        instance = aas_xmlization.get_shell_result_from_file(
+        instance = aas_xmlization.get_asset_administration_shell_result_from_file(
             path
         )
 
@@ -9564,7 +9568,7 @@ def get_shell_result_from_file(
 
     :param path:
         to the file representing an instance of
-        :py:class:`.types.GetShellResult` in XML
+        :py:class:`.types.GetAssetAdministrationShellResult` in XML
     :param has_iterparse:
         Module containing ``iterparse`` function.
 
@@ -9573,21 +9577,21 @@ def get_shell_result_from_file(
         a library such as `defusedxml.ElementTree`_.
     :raise: :py:class:`DeserializationException` if unexpected input
     :return:
-        Instance of :py:class:`.types.GetShellResult` read from
+        Instance of :py:class:`.types.GetAssetAdministrationShellResult` read from
         :paramref:`path`
     """
     with open(os.fspath(path), "rt", encoding="utf-8") as fid:
         iterator = has_iterparse.iterparse(fid, ["start", "end"])
-        return get_shell_result_from_iterparse(
+        return get_asset_administration_shell_result_from_iterparse(
             _with_elements_cleared_after_yield(iterator)
         )
 
 
-def get_shell_result_from_str(
+def get_asset_administration_shell_result_from_str(
     text: str, has_iterparse: HasIterparse = xml.etree.ElementTree
-) -> aas_types.GetShellResult:
+) -> aas_types.GetAssetAdministrationShellResult:
     """
-    Read an instance of :py:class:`.types.GetShellResult` from
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult` from
     the :paramref:`text`.
 
     Example usage:
@@ -9598,7 +9602,7 @@ def get_shell_result_from_str(
         import aas_core3_http.xmlization as aas_xmlization
 
         text = "<...>...</...>"
-        instance = aas_xmlization.get_shell_result_from_str(
+        instance = aas_xmlization.get_asset_administration_shell_result_from_str(
             text
         )
 
@@ -9606,7 +9610,7 @@ def get_shell_result_from_str(
 
     :param text:
         representing an instance of
-        :py:class:`.types.GetShellResult` in XML
+        :py:class:`.types.GetAssetAdministrationShellResult` in XML
     :param has_iterparse:
         Module containing ``iterparse`` function.
 
@@ -9615,11 +9619,13 @@ def get_shell_result_from_str(
         a library such as `defusedxml.ElementTree`_.
     :raise: :py:class:`DeserializationException` if unexpected input
     :return:
-        Instance of :py:class:`.types.GetShellResult` read from
+        Instance of :py:class:`.types.GetAssetAdministrationShellResult` read from
         :paramref:`text`
     """
     iterator = has_iterparse.iterparse(io.StringIO(text), ["start", "end"])
-    return get_shell_result_from_iterparse(_with_elements_cleared_after_yield(iterator))
+    return get_asset_administration_shell_result_from_iterparse(
+        _with_elements_cleared_after_yield(iterator)
+    )
 
 
 def get_submodel_result_from_iterparse(
@@ -9803,6 +9809,358 @@ def get_submodel_result_from_str(
     return get_submodel_result_from_iterparse(
         _with_elements_cleared_after_yield(iterator)
     )
+
+
+def message_from_iterparse(
+    iterator: Iterator[Tuple[str, Element]]
+) -> aas_types.Message:
+    """
+    Read an instance of :py:class:`.types.Message` from
+    the :paramref:`iterator`.
+
+    Example usage:
+
+    .. code-block::
+
+        import pathlib
+        import xml.etree.ElementTree as ET
+
+        import aas_core3_http.xmlization as aas_xmlization
+
+        path = pathlib.Path(...)
+        with path.open("rt") as fid:
+            iterator = ET.iterparse(
+                source=fid,
+                events=['start', 'end']
+            )
+            instance = aas_xmlization.message_from_iterparse(
+                iterator
+            )
+
+        # Do something with the ``instance``
+
+    :param iterator:
+        Input stream of ``(event, element)`` coming from
+        :py:func:`xml.etree.ElementTree.iterparse` with the argument
+        ``events=["start", "end"]``
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return:
+        Instance of :py:class:`.types.Message` read from
+        :paramref:`iterator`
+    """
+    next_event_element = next(iterator, None)
+    if next_event_element is None:
+        raise DeserializationException(
+            # fmt: off
+            "Expected the start element for Message, "
+            "but got the end-of-input"
+            # fmt: on
+        )
+
+    next_event, next_element = next_event_element
+    if next_event != "start":
+        raise DeserializationException(
+            f"Expected the start element for Message, "
+            f"but got event {next_event!r} and element {next_element.tag!r}"
+        )
+
+    try:
+        return _read_message_as_element(next_element, iterator)
+    except DeserializationException as exception:
+        exception.path._prepend(ElementSegment(next_element))
+        raise exception
+
+
+def message_from_stream(
+    stream: TextIO, has_iterparse: HasIterparse = xml.etree.ElementTree
+) -> aas_types.Message:
+    """
+    Read an instance of :py:class:`.types.Message` from
+    the :paramref:`stream`.
+
+    Example usage:
+
+    .. code-block::
+
+        import aas_core3_http.xmlization as aas_xmlization
+
+        with open_some_stream_over_network(...) as stream:
+            instance = aas_xmlization.message_from_stream(
+                stream
+            )
+
+        # Do something with the ``instance``
+
+    :param stream:
+        representing an instance of
+        :py:class:`.types.Message` in XML
+    :param has_iterparse:
+        Module containing ``iterparse`` function.
+
+        Default is to use :py:mod:`xml.etree.ElementTree` from the standard
+        library. If you have to deal with malicious input, consider using
+        a library such as `defusedxml.ElementTree`_.
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return:
+        Instance of :py:class:`.types.Message` read from
+        :paramref:`stream`
+    """
+    iterator = has_iterparse.iterparse(stream, ["start", "end"])
+    return message_from_iterparse(_with_elements_cleared_after_yield(iterator))
+
+
+def message_from_file(
+    path: PathLike, has_iterparse: HasIterparse = xml.etree.ElementTree
+) -> aas_types.Message:
+    """
+    Read an instance of :py:class:`.types.Message` from
+    the :paramref:`path`.
+
+    Example usage:
+
+    .. code-block::
+
+        import pathlib
+        import aas_core3_http.xmlization as aas_xmlization
+
+        path = pathlib.Path(...)
+        instance = aas_xmlization.message_from_file(
+            path
+        )
+
+        # Do something with the ``instance``
+
+    :param path:
+        to the file representing an instance of
+        :py:class:`.types.Message` in XML
+    :param has_iterparse:
+        Module containing ``iterparse`` function.
+
+        Default is to use :py:mod:`xml.etree.ElementTree` from the standard
+        library. If you have to deal with malicious input, consider using
+        a library such as `defusedxml.ElementTree`_.
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return:
+        Instance of :py:class:`.types.Message` read from
+        :paramref:`path`
+    """
+    with open(os.fspath(path), "rt", encoding="utf-8") as fid:
+        iterator = has_iterparse.iterparse(fid, ["start", "end"])
+        return message_from_iterparse(_with_elements_cleared_after_yield(iterator))
+
+
+def message_from_str(
+    text: str, has_iterparse: HasIterparse = xml.etree.ElementTree
+) -> aas_types.Message:
+    """
+    Read an instance of :py:class:`.types.Message` from
+    the :paramref:`text`.
+
+    Example usage:
+
+    .. code-block::
+
+        import pathlib
+        import aas_core3_http.xmlization as aas_xmlization
+
+        text = "<...>...</...>"
+        instance = aas_xmlization.message_from_str(
+            text
+        )
+
+        # Do something with the ``instance``
+
+    :param text:
+        representing an instance of
+        :py:class:`.types.Message` in XML
+    :param has_iterparse:
+        Module containing ``iterparse`` function.
+
+        Default is to use :py:mod:`xml.etree.ElementTree` from the standard
+        library. If you have to deal with malicious input, consider using
+        a library such as `defusedxml.ElementTree`_.
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return:
+        Instance of :py:class:`.types.Message` read from
+        :paramref:`text`
+    """
+    iterator = has_iterparse.iterparse(io.StringIO(text), ["start", "end"])
+    return message_from_iterparse(_with_elements_cleared_after_yield(iterator))
+
+
+def result_from_iterparse(iterator: Iterator[Tuple[str, Element]]) -> aas_types.Result:
+    """
+    Read an instance of :py:class:`.types.Result` from
+    the :paramref:`iterator`.
+
+    Example usage:
+
+    .. code-block::
+
+        import pathlib
+        import xml.etree.ElementTree as ET
+
+        import aas_core3_http.xmlization as aas_xmlization
+
+        path = pathlib.Path(...)
+        with path.open("rt") as fid:
+            iterator = ET.iterparse(
+                source=fid,
+                events=['start', 'end']
+            )
+            instance = aas_xmlization.result_from_iterparse(
+                iterator
+            )
+
+        # Do something with the ``instance``
+
+    :param iterator:
+        Input stream of ``(event, element)`` coming from
+        :py:func:`xml.etree.ElementTree.iterparse` with the argument
+        ``events=["start", "end"]``
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return:
+        Instance of :py:class:`.types.Result` read from
+        :paramref:`iterator`
+    """
+    next_event_element = next(iterator, None)
+    if next_event_element is None:
+        raise DeserializationException(
+            # fmt: off
+            "Expected the start element for Result, "
+            "but got the end-of-input"
+            # fmt: on
+        )
+
+    next_event, next_element = next_event_element
+    if next_event != "start":
+        raise DeserializationException(
+            f"Expected the start element for Result, "
+            f"but got event {next_event!r} and element {next_element.tag!r}"
+        )
+
+    try:
+        return _read_result_as_element(next_element, iterator)
+    except DeserializationException as exception:
+        exception.path._prepend(ElementSegment(next_element))
+        raise exception
+
+
+def result_from_stream(
+    stream: TextIO, has_iterparse: HasIterparse = xml.etree.ElementTree
+) -> aas_types.Result:
+    """
+    Read an instance of :py:class:`.types.Result` from
+    the :paramref:`stream`.
+
+    Example usage:
+
+    .. code-block::
+
+        import aas_core3_http.xmlization as aas_xmlization
+
+        with open_some_stream_over_network(...) as stream:
+            instance = aas_xmlization.result_from_stream(
+                stream
+            )
+
+        # Do something with the ``instance``
+
+    :param stream:
+        representing an instance of
+        :py:class:`.types.Result` in XML
+    :param has_iterparse:
+        Module containing ``iterparse`` function.
+
+        Default is to use :py:mod:`xml.etree.ElementTree` from the standard
+        library. If you have to deal with malicious input, consider using
+        a library such as `defusedxml.ElementTree`_.
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return:
+        Instance of :py:class:`.types.Result` read from
+        :paramref:`stream`
+    """
+    iterator = has_iterparse.iterparse(stream, ["start", "end"])
+    return result_from_iterparse(_with_elements_cleared_after_yield(iterator))
+
+
+def result_from_file(
+    path: PathLike, has_iterparse: HasIterparse = xml.etree.ElementTree
+) -> aas_types.Result:
+    """
+    Read an instance of :py:class:`.types.Result` from
+    the :paramref:`path`.
+
+    Example usage:
+
+    .. code-block::
+
+        import pathlib
+        import aas_core3_http.xmlization as aas_xmlization
+
+        path = pathlib.Path(...)
+        instance = aas_xmlization.result_from_file(
+            path
+        )
+
+        # Do something with the ``instance``
+
+    :param path:
+        to the file representing an instance of
+        :py:class:`.types.Result` in XML
+    :param has_iterparse:
+        Module containing ``iterparse`` function.
+
+        Default is to use :py:mod:`xml.etree.ElementTree` from the standard
+        library. If you have to deal with malicious input, consider using
+        a library such as `defusedxml.ElementTree`_.
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return:
+        Instance of :py:class:`.types.Result` read from
+        :paramref:`path`
+    """
+    with open(os.fspath(path), "rt", encoding="utf-8") as fid:
+        iterator = has_iterparse.iterparse(fid, ["start", "end"])
+        return result_from_iterparse(_with_elements_cleared_after_yield(iterator))
+
+
+def result_from_str(
+    text: str, has_iterparse: HasIterparse = xml.etree.ElementTree
+) -> aas_types.Result:
+    """
+    Read an instance of :py:class:`.types.Result` from
+    the :paramref:`text`.
+
+    Example usage:
+
+    .. code-block::
+
+        import pathlib
+        import aas_core3_http.xmlization as aas_xmlization
+
+        text = "<...>...</...>"
+        instance = aas_xmlization.result_from_str(
+            text
+        )
+
+        # Do something with the ``instance``
+
+    :param text:
+        representing an instance of
+        :py:class:`.types.Result` in XML
+    :param has_iterparse:
+        Module containing ``iterparse`` function.
+
+        Default is to use :py:mod:`xml.etree.ElementTree` from the standard
+        library. If you have to deal with malicious input, consider using
+        a library such as `defusedxml.ElementTree`_.
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return:
+        Instance of :py:class:`.types.Result` read from
+        :paramref:`text`
+    """
+    iterator = has_iterparse.iterparse(io.StringIO(text), ["start", "end"])
+    return result_from_iterparse(_with_elements_cleared_after_yield(iterator))
 
 
 # NOTE (mristin, 2022-10-08):
@@ -23099,13 +23457,13 @@ def _read_paged_result_as_element(
     return read_as_sequence(element, iterator)
 
 
-class _ReaderAndSetterForGetShellResult:
+class _ReaderAndSetterForGetAssetAdministrationShellResult:
     """
     Provide a buffer for reading and setting the properties for the class
-    :py:class:`GetShellResult`.
+    :py:class:`GetAssetAdministrationShellResult`.
 
     The properties correspond to the constructor arguments of
-    :py:class:`GetShellResult`. We use this buffer to facilitate dispatching when
+    :py:class:`GetAssetAdministrationShellResult`. We use this buffer to facilitate dispatching when
     parsing the properties in a streaming fashion.
     """
 
@@ -23119,7 +23477,7 @@ class _ReaderAndSetterForGetShellResult:
     ) -> None:
         """
         Read :paramref:`element` as the property
-        :py:attr:`.types.GetShellResult.paging_metadata` and set it.
+        :py:attr:`.types.GetAssetAdministrationShellResult.paging_metadata` and set it.
         """
         self.paging_metadata = _read_paged_result_paging_metadata_as_sequence(
             element, iterator
@@ -23130,7 +23488,7 @@ class _ReaderAndSetterForGetShellResult:
     ) -> None:
         """
         Read :paramref:`element` as the property
-        :py:attr:`.types.GetShellResult.result` and set it.
+        :py:attr:`.types.GetAssetAdministrationShellResult.result` and set it.
         """
         if element.text is not None and len(element.text.strip()) != 0:
             raise DeserializationException(
@@ -23175,11 +23533,11 @@ class _ReaderAndSetterForGetShellResult:
         self.result = result
 
 
-def _read_get_shell_result_as_sequence(
+def _read_get_asset_administration_shell_result_as_sequence(
     element: Element, iterator: Iterator[Tuple[str, Element]]
-) -> aas_types.GetShellResult:
+) -> aas_types.GetAssetAdministrationShellResult:
     """
-    Read an instance of :py:class:`.types.GetShellResult`
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult`
     as a sequence of XML-encoded properties.
 
     The end element corresponding to the :paramref:`element` will be
@@ -23201,7 +23559,7 @@ def _read_get_shell_result_as_sequence(
 
     _raise_if_has_tail_or_attrib(element)
 
-    reader_and_setter = _ReaderAndSetterForGetShellResult()
+    reader_and_setter = _ReaderAndSetterForGetAssetAdministrationShellResult()
 
     while True:
         next_event_element = next(iterator, None)
@@ -23228,8 +23586,10 @@ def _read_get_shell_result_as_sequence(
             exception.path._prepend(ElementSegment(next_element))
             raise
 
-        read_and_set_method = _READ_AND_SET_DISPATCH_FOR_GET_SHELL_RESULT.get(
-            tag_wo_ns, None
+        read_and_set_method = (
+            _READ_AND_SET_DISPATCH_FOR_GET_ASSET_ADMINISTRATION_SHELL_RESULT.get(
+                tag_wo_ns, None
+            )
         )
         if read_and_set_method is None:
             an_exception = DeserializationException(
@@ -23253,16 +23613,16 @@ def _read_get_shell_result_as_sequence(
     if reader_and_setter.result is None:
         raise DeserializationException("The required property 'result' is missing")
 
-    return aas_types.GetShellResult(
+    return aas_types.GetAssetAdministrationShellResult(
         reader_and_setter.paging_metadata, reader_and_setter.result
     )
 
 
-def _read_get_shell_result_as_element(
+def _read_get_asset_administration_shell_result_as_element(
     element: Element, iterator: Iterator[Tuple[str, Element]]
-) -> aas_types.GetShellResult:
+) -> aas_types.GetAssetAdministrationShellResult:
     """
-    Read an instance of :py:class:`.types.GetShellResult` from
+    Read an instance of :py:class:`.types.GetAssetAdministrationShellResult` from
     :paramref:`iterator`, including the end element.
 
     :param element: start element
@@ -23275,13 +23635,13 @@ def _read_get_shell_result_as_element(
     """
     tag_wo_ns = _parse_element_tag(element)
 
-    if tag_wo_ns != "getShellResult":
+    if tag_wo_ns != "getAssetAdministrationShellResult":
         raise DeserializationException(
-            f"Expected the element with the tag 'getShellResult', "
+            f"Expected the element with the tag 'getAssetAdministrationShellResult', "
             f"but got tag: {tag_wo_ns}"
         )
 
-    return _read_get_shell_result_as_sequence(element, iterator)
+    return _read_get_asset_administration_shell_result_as_sequence(element, iterator)
 
 
 class _ReaderAndSetterForGetSubmodelResult:
@@ -23465,6 +23825,377 @@ def _read_get_submodel_result_as_element(
         )
 
     return _read_get_submodel_result_as_sequence(element, iterator)
+
+
+def _read_messagetype_from_element_text(
+    element: Element, iterator: Iterator[Tuple[str, Element]]
+) -> aas_types.Messagetype:
+    """
+    Parse the text of :paramref:`element` as a literal of
+    :py:class:`.types.Messagetype`, and read the corresponding
+    end element from :paramref:`iterator`.
+
+    :param element: start element
+    :param iterator:
+        Input stream of ``(event, element)`` coming from
+        :py:func:`xml.etree.ElementTree.iterparse` with the argument
+        ``events=["start", "end"]``
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return: parsed value
+    """
+    text = _read_text_from_element(element, iterator)
+
+    literal = aas_stringification.messagetype_from_str(text)
+    if literal is None:
+        raise DeserializationException(
+            f"Not a valid string representation of " f"a literal of Messagetype: {text}"
+        )
+
+    return literal
+
+
+class _ReaderAndSetterForMessage:
+    """
+    Provide a buffer for reading and setting the properties for the class
+    :py:class:`Message`.
+
+    The properties correspond to the constructor arguments of
+    :py:class:`Message`. We use this buffer to facilitate dispatching when
+    parsing the properties in a streaming fashion.
+    """
+
+    def __init__(self) -> None:
+        """Initialize with all the properties unset."""
+        self.code: Optional[str] = None
+        self.correlation_id: Optional[str] = None
+        self.message_type: Optional[aas_types.Messagetype] = None
+        self.text: Optional[str] = None
+        self.timestamp: Optional[str] = None
+
+    def read_and_set_code(
+        self, element: Element, iterator: Iterator[Tuple[str, Element]]
+    ) -> None:
+        """
+        Read :paramref:`element` as the property
+        :py:attr:`.types.Message.code` and set it.
+        """
+        self.code = _read_str_from_element_text(element, iterator)
+
+    def read_and_set_correlation_id(
+        self, element: Element, iterator: Iterator[Tuple[str, Element]]
+    ) -> None:
+        """
+        Read :paramref:`element` as the property
+        :py:attr:`.types.Message.correlation_id` and set it.
+        """
+        self.correlation_id = _read_str_from_element_text(element, iterator)
+
+    def read_and_set_message_type(
+        self, element: Element, iterator: Iterator[Tuple[str, Element]]
+    ) -> None:
+        """
+        Read :paramref:`element` as the property
+        :py:attr:`.types.Message.message_type` and set it.
+        """
+        self.message_type = _read_messagetype_from_element_text(element, iterator)
+
+    def read_and_set_text(
+        self, element: Element, iterator: Iterator[Tuple[str, Element]]
+    ) -> None:
+        """
+        Read :paramref:`element` as the property
+        :py:attr:`.types.Message.text` and set it.
+        """
+        self.text = _read_str_from_element_text(element, iterator)
+
+    def read_and_set_timestamp(
+        self, element: Element, iterator: Iterator[Tuple[str, Element]]
+    ) -> None:
+        """
+        Read :paramref:`element` as the property
+        :py:attr:`.types.Message.timestamp` and set it.
+        """
+        self.timestamp = _read_str_from_element_text(element, iterator)
+
+
+def _read_message_as_sequence(
+    element: Element, iterator: Iterator[Tuple[str, Element]]
+) -> aas_types.Message:
+    """
+    Read an instance of :py:class:`.types.Message`
+    as a sequence of XML-encoded properties.
+
+    The end element corresponding to the :paramref:`element` will be
+    read as well.
+
+    :param element: start element, parent of the sequence
+    :param iterator:
+        Input stream of ``(event, element)`` coming from
+        :py:func:`xml.etree.ElementTree.iterparse` with the argument
+        ``events=["start", "end"]``
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return: parsed instance
+    """
+    if element.text is not None and len(element.text.strip()) != 0:
+        raise DeserializationException(
+            f"Expected only XML elements representing the properties and whitespace text, "
+            f"but got text: {element.text!r}"
+        )
+
+    _raise_if_has_tail_or_attrib(element)
+
+    reader_and_setter = _ReaderAndSetterForMessage()
+
+    while True:
+        next_event_element = next(iterator, None)
+        if next_event_element is None:
+            raise DeserializationException(
+                "Expected one or more XML-encoded properties or the end element, "
+                "but got the end-of-input"
+            )
+
+        next_event, next_element = next_event_element
+        if next_event == "end" and next_element.tag == element.tag:
+            # We reached the end element enclosing the sequence.
+            break
+
+        if next_event != "start":
+            raise DeserializationException(
+                "Expected a start element corresponding to a property, "
+                f"but got event {next_event!r} and element {next_element.tag!r}"
+            )
+
+        try:
+            tag_wo_ns = _parse_element_tag(next_element)
+        except DeserializationException as exception:
+            exception.path._prepend(ElementSegment(next_element))
+            raise
+
+        read_and_set_method = _READ_AND_SET_DISPATCH_FOR_MESSAGE.get(tag_wo_ns, None)
+        if read_and_set_method is None:
+            an_exception = DeserializationException(
+                f"Expected an element representing a property, "
+                f"but got an element with unexpected tag: {tag_wo_ns!r}"
+            )
+            an_exception.path._prepend(ElementSegment(next_element))
+            raise an_exception
+
+        try:
+            read_and_set_method(reader_and_setter, next_element, iterator)
+        except DeserializationException as exception:
+            exception.path._prepend(ElementSegment(next_element))
+            raise
+
+    if reader_and_setter.code is None:
+        raise DeserializationException("The required property 'code' is missing")
+
+    if reader_and_setter.correlation_id is None:
+        raise DeserializationException(
+            "The required property 'correlationId' is missing"
+        )
+
+    if reader_and_setter.message_type is None:
+        raise DeserializationException("The required property 'messageType' is missing")
+
+    if reader_and_setter.text is None:
+        raise DeserializationException("The required property 'text' is missing")
+
+    if reader_and_setter.timestamp is None:
+        raise DeserializationException("The required property 'timestamp' is missing")
+
+    return aas_types.Message(
+        reader_and_setter.code,
+        reader_and_setter.correlation_id,
+        reader_and_setter.message_type,
+        reader_and_setter.text,
+        reader_and_setter.timestamp,
+    )
+
+
+def _read_message_as_element(
+    element: Element, iterator: Iterator[Tuple[str, Element]]
+) -> aas_types.Message:
+    """
+    Read an instance of :py:class:`.types.Message` from
+    :paramref:`iterator`, including the end element.
+
+    :param element: start element
+    :param iterator:
+        Input stream of ``(event, element)`` coming from
+        :py:func:`xml.etree.ElementTree.iterparse` with the argument
+        ``events=["start", "end"]``
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return: parsed instance
+    """
+    tag_wo_ns = _parse_element_tag(element)
+
+    if tag_wo_ns != "message":
+        raise DeserializationException(
+            f"Expected the element with the tag 'message', " f"but got tag: {tag_wo_ns}"
+        )
+
+    return _read_message_as_sequence(element, iterator)
+
+
+class _ReaderAndSetterForResult:
+    """
+    Provide a buffer for reading and setting the properties for the class
+    :py:class:`Result`.
+
+    The properties correspond to the constructor arguments of
+    :py:class:`Result`. We use this buffer to facilitate dispatching when
+    parsing the properties in a streaming fashion.
+    """
+
+    def __init__(self) -> None:
+        """Initialize with all the properties unset."""
+        self.messages: Optional[List[aas_types.Message]] = None
+
+    def read_and_set_messages(
+        self, element: Element, iterator: Iterator[Tuple[str, Element]]
+    ) -> None:
+        """
+        Read :paramref:`element` as the property
+        :py:attr:`.types.Result.messages` and set it.
+        """
+        if element.text is not None and len(element.text.strip()) != 0:
+            raise DeserializationException(
+                f"Expected only item elements and whitespace text, "
+                f"but got text: {element.text!r}"
+            )
+
+        result: List[aas_types.Message] = []
+
+        item_i = 0
+
+        while True:
+            next_event_element = next(iterator, None)
+            if next_event_element is None:
+                raise DeserializationException(
+                    "Expected one or more items from a list or the end element, "
+                    "but got end-of-input"
+                )
+
+            next_event, next_element = next_event_element
+            if next_event == "end" and next_element.tag == element.tag:
+                # We reached the end of the list.
+                break
+
+            if next_event != "start":
+                raise DeserializationException(
+                    "Expected a start element corresponding to an item, "
+                    f"but got event {next_event!r} and element {next_element.tag!r}"
+                )
+
+            try:
+                item = _read_message_as_element(next_element, iterator)
+            except DeserializationException as exception:
+                exception.path._prepend(IndexSegment(next_element, item_i))
+                raise
+
+            result.append(item)
+            item_i += 1
+
+        self.messages = result
+
+
+def _read_result_as_sequence(
+    element: Element, iterator: Iterator[Tuple[str, Element]]
+) -> aas_types.Result:
+    """
+    Read an instance of :py:class:`.types.Result`
+    as a sequence of XML-encoded properties.
+
+    The end element corresponding to the :paramref:`element` will be
+    read as well.
+
+    :param element: start element, parent of the sequence
+    :param iterator:
+        Input stream of ``(event, element)`` coming from
+        :py:func:`xml.etree.ElementTree.iterparse` with the argument
+        ``events=["start", "end"]``
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return: parsed instance
+    """
+    if element.text is not None and len(element.text.strip()) != 0:
+        raise DeserializationException(
+            f"Expected only XML elements representing the properties and whitespace text, "
+            f"but got text: {element.text!r}"
+        )
+
+    _raise_if_has_tail_or_attrib(element)
+
+    reader_and_setter = _ReaderAndSetterForResult()
+
+    while True:
+        next_event_element = next(iterator, None)
+        if next_event_element is None:
+            raise DeserializationException(
+                "Expected one or more XML-encoded properties or the end element, "
+                "but got the end-of-input"
+            )
+
+        next_event, next_element = next_event_element
+        if next_event == "end" and next_element.tag == element.tag:
+            # We reached the end element enclosing the sequence.
+            break
+
+        if next_event != "start":
+            raise DeserializationException(
+                "Expected a start element corresponding to a property, "
+                f"but got event {next_event!r} and element {next_element.tag!r}"
+            )
+
+        try:
+            tag_wo_ns = _parse_element_tag(next_element)
+        except DeserializationException as exception:
+            exception.path._prepend(ElementSegment(next_element))
+            raise
+
+        read_and_set_method = _READ_AND_SET_DISPATCH_FOR_RESULT.get(tag_wo_ns, None)
+        if read_and_set_method is None:
+            an_exception = DeserializationException(
+                f"Expected an element representing a property, "
+                f"but got an element with unexpected tag: {tag_wo_ns!r}"
+            )
+            an_exception.path._prepend(ElementSegment(next_element))
+            raise an_exception
+
+        try:
+            read_and_set_method(reader_and_setter, next_element, iterator)
+        except DeserializationException as exception:
+            exception.path._prepend(ElementSegment(next_element))
+            raise
+
+    if reader_and_setter.messages is None:
+        raise DeserializationException("The required property 'messages' is missing")
+
+    return aas_types.Result(reader_and_setter.messages)
+
+
+def _read_result_as_element(
+    element: Element, iterator: Iterator[Tuple[str, Element]]
+) -> aas_types.Result:
+    """
+    Read an instance of :py:class:`.types.Result` from
+    :paramref:`iterator`, including the end element.
+
+    :param element: start element
+    :param iterator:
+        Input stream of ``(event, element)`` coming from
+        :py:func:`xml.etree.ElementTree.iterparse` with the argument
+        ``events=["start", "end"]``
+    :raise: :py:class:`DeserializationException` if unexpected input
+    :return: parsed instance
+    """
+    tag_wo_ns = _parse_element_tag(element)
+
+    if tag_wo_ns != "result":
+        raise DeserializationException(
+            f"Expected the element with the tag 'result', " f"but got tag: {tag_wo_ns}"
+        )
+
+    return _read_result_as_sequence(element, iterator)
 
 
 #: Dispatch XML class names to read-as-sequence functions
@@ -24457,7 +25188,7 @@ _DISPATCH_FOR_PAGED_RESULT: Mapping[
     str, Callable[[Element, Iterator[Tuple[str, Element]]], aas_types.PagedResult]
 ] = {
     "pagedResult": _read_paged_result_as_sequence,
-    "getShellResult": _read_get_shell_result_as_sequence,
+    "getAssetAdministrationShellResult": _read_get_asset_administration_shell_result_as_sequence,
     "getSubmodelResult": _read_get_submodel_result_as_sequence,
 }
 
@@ -24475,16 +25206,20 @@ _READ_AND_SET_DISPATCH_FOR_PAGED_RESULT: Mapping[
 
 
 #: Dispatch XML property name to read & set method in
-#: :py:class:`_ReaderAndSetterForGetShellResult`
-_READ_AND_SET_DISPATCH_FOR_GET_SHELL_RESULT: Mapping[
+#: :py:class:`_ReaderAndSetterForGetAssetAdministrationShellResult`
+_READ_AND_SET_DISPATCH_FOR_GET_ASSET_ADMINISTRATION_SHELL_RESULT: Mapping[
     str,
     Callable[
-        [_ReaderAndSetterForGetShellResult, Element, Iterator[Tuple[str, Element]]],
+        [
+            _ReaderAndSetterForGetAssetAdministrationShellResult,
+            Element,
+            Iterator[Tuple[str, Element]],
+        ],
         None,
     ],
 ] = {
-    "pagingMetadata": _ReaderAndSetterForGetShellResult.read_and_set_paging_metadata,
-    "result": _ReaderAndSetterForGetShellResult.read_and_set_result,
+    "pagingMetadata": _ReaderAndSetterForGetAssetAdministrationShellResult.read_and_set_paging_metadata,
+    "result": _ReaderAndSetterForGetAssetAdministrationShellResult.read_and_set_result,
 }
 
 
@@ -24499,6 +25234,32 @@ _READ_AND_SET_DISPATCH_FOR_GET_SUBMODEL_RESULT: Mapping[
 ] = {
     "pagingMetadata": _ReaderAndSetterForGetSubmodelResult.read_and_set_paging_metadata,
     "result": _ReaderAndSetterForGetSubmodelResult.read_and_set_result,
+}
+
+
+#: Dispatch XML property name to read & set method in
+#: :py:class:`_ReaderAndSetterForMessage`
+_READ_AND_SET_DISPATCH_FOR_MESSAGE: Mapping[
+    str,
+    Callable[
+        [_ReaderAndSetterForMessage, Element, Iterator[Tuple[str, Element]]], None
+    ],
+] = {
+    "code": _ReaderAndSetterForMessage.read_and_set_code,
+    "correlationId": _ReaderAndSetterForMessage.read_and_set_correlation_id,
+    "messageType": _ReaderAndSetterForMessage.read_and_set_message_type,
+    "text": _ReaderAndSetterForMessage.read_and_set_text,
+    "timestamp": _ReaderAndSetterForMessage.read_and_set_timestamp,
+}
+
+
+#: Dispatch XML property name to read & set method in
+#: :py:class:`_ReaderAndSetterForResult`
+_READ_AND_SET_DISPATCH_FOR_RESULT: Mapping[
+    str,
+    Callable[[_ReaderAndSetterForResult, Element, Iterator[Tuple[str, Element]]], None],
+] = {
+    "messages": _ReaderAndSetterForResult.read_and_set_messages,
 }
 
 
@@ -27417,8 +28178,8 @@ class _Serializer(aas_types.AbstractVisitor):
         self._write_paged_result_as_sequence(that)
         self._write_end_element("pagedResult")
 
-    def _write_get_shell_result_as_sequence(
-        self, that: aas_types.GetShellResult
+    def _write_get_asset_administration_shell_result_as_sequence(
+        self, that: aas_types.GetAssetAdministrationShellResult
     ) -> None:
         """
         Serialize :paramref:`that` to :py:attr:`~stream` as a sequence of
@@ -27441,7 +28202,9 @@ class _Serializer(aas_types.AbstractVisitor):
                 self.visit(an_item)
             self._write_end_element("result")
 
-    def visit_get_shell_result(self, that: aas_types.GetShellResult) -> None:
+    def visit_get_asset_administration_shell_result(
+        self, that: aas_types.GetAssetAdministrationShellResult
+    ) -> None:
         """
         Serialize :paramref:`that` to :py:attr:`~stream` as an XML element.
 
@@ -27450,9 +28213,9 @@ class _Serializer(aas_types.AbstractVisitor):
 
         :param that: instance to be serialized
         """
-        self._write_start_element("getShellResult")
-        self._write_get_shell_result_as_sequence(that)
-        self._write_end_element("getShellResult")
+        self._write_start_element("getAssetAdministrationShellResult")
+        self._write_get_asset_administration_shell_result_as_sequence(that)
+        self._write_end_element("getAssetAdministrationShellResult")
 
     def _write_get_submodel_result_as_sequence(
         self, that: aas_types.GetSubmodelResult
@@ -27490,6 +28253,70 @@ class _Serializer(aas_types.AbstractVisitor):
         self._write_start_element("getSubmodelResult")
         self._write_get_submodel_result_as_sequence(that)
         self._write_end_element("getSubmodelResult")
+
+    def _write_message_as_sequence(self, that: aas_types.Message) -> None:
+        """
+        Serialize :paramref:`that` to :py:attr:`~stream` as a sequence of
+        XML elements.
+
+        Each element in the sequence corresponds to a property. If no properties
+        are set, nothing is written to the :py:attr:`~stream`.
+
+        :param that: instance to be serialized
+        """
+        self._write_str_property("code", that.code)
+
+        self._write_str_property("correlationId", that.correlation_id)
+
+        self._write_str_property("messageType", that.message_type.value)
+
+        self._write_str_property("text", that.text)
+
+        self._write_str_property("timestamp", that.timestamp)
+
+    def visit_message(self, that: aas_types.Message) -> None:
+        """
+        Serialize :paramref:`that` to :py:attr:`~stream` as an XML element.
+
+        The enclosing XML element designates the class of the instance, where its
+        children correspond to the properties of the instance.
+
+        :param that: instance to be serialized
+        """
+        self._write_start_element("message")
+        self._write_message_as_sequence(that)
+        self._write_end_element("message")
+
+    def _write_result_as_sequence(self, that: aas_types.Result) -> None:
+        """
+        Serialize :paramref:`that` to :py:attr:`~stream` as a sequence of
+        XML elements.
+
+        Each element in the sequence corresponds to a property. If no properties
+        are set, nothing is written to the :py:attr:`~stream`.
+
+        :param that: instance to be serialized
+        """
+        if len(that.messages) == 0:
+            self._write_empty_element("messages")
+        else:
+            self._write_start_element("messages")
+            for an_item in that.messages:
+                self.visit(an_item)
+            self._write_end_element("messages")
+
+    def visit_result(self, that: aas_types.Result) -> None:
+        """
+        Serialize :paramref:`that` to :py:attr:`~stream` as an XML element.
+
+        The enclosing XML element designates the class of the instance, where its
+        children correspond to the properties of the instance.
+
+        :param that: instance to be serialized
+        """
+        self._write_start_element("result")
+        self._write_result_as_sequence(that)
+        self._write_end_element("result")
 
 
 def write(instance: aas_types.Class, stream: TextIO) -> None:

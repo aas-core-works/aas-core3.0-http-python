@@ -7302,7 +7302,7 @@ def _paged_result_from_jsonable_without_dispatch(
     return aas_types.PagedResult(setter.paging_metadata)
 
 
-class _SetterForGetShellResult:
+class _SetterForGetAssetAdministrationShellResult:
     """Provide de-serialization-setters for properties."""
 
     def __init__(self) -> None:
@@ -7346,22 +7346,24 @@ class _SetterForGetShellResult:
         self.result = items
 
 
-def get_shell_result_from_jsonable(jsonable: Jsonable) -> aas_types.GetShellResult:
+def get_asset_administration_shell_result_from_jsonable(
+    jsonable: Jsonable,
+) -> aas_types.GetAssetAdministrationShellResult:
     """
-    Parse an instance of :py:class:`.types.GetShellResult` from the JSON-able
+    Parse an instance of :py:class:`.types.GetAssetAdministrationShellResult` from the JSON-able
     structure :paramref:`jsonable`.
 
     :param jsonable: structure to be parsed
-    :return: Parsed instance of :py:class:`.types.GetShellResult`
+    :return: Parsed instance of :py:class:`.types.GetAssetAdministrationShellResult`
     :raise: :py:class:`DeserializationException` if unexpected :paramref:`jsonable`
     """
     if not isinstance(jsonable, collections.abc.Mapping):
         raise DeserializationException(f"Expected a mapping, but got: {type(jsonable)}")
 
-    setter = _SetterForGetShellResult()
+    setter = _SetterForGetAssetAdministrationShellResult()
 
     for key, jsonable_value in jsonable.items():
-        setter_method = _SETTER_MAP_FOR_GET_SHELL_RESULT.get(key)
+        setter_method = _SETTER_MAP_FOR_GET_ASSET_ADMINISTRATION_SHELL_RESULT.get(key)
         if setter_method is None:
             raise DeserializationException(f"Unexpected property: {key}")
 
@@ -7379,7 +7381,9 @@ def get_shell_result_from_jsonable(jsonable: Jsonable) -> aas_types.GetShellResu
     if setter.result is None:
         raise DeserializationException("The required property 'result' is missing")
 
-    return aas_types.GetShellResult(setter.paging_metadata, setter.result)
+    return aas_types.GetAssetAdministrationShellResult(
+        setter.paging_metadata, setter.result
+    )
 
 
 class _SetterForGetSubmodelResult:
@@ -7462,6 +7466,201 @@ def get_submodel_result_from_jsonable(
         raise DeserializationException("The required property 'result' is missing")
 
     return aas_types.GetSubmodelResult(setter.paging_metadata, setter.result)
+
+
+def messagetype_from_jsonable(jsonable: Jsonable) -> aas_types.Messagetype:
+    """
+    Convert the JSON-able structure :paramref:`jsonable` to a literal of
+    :py:class:`.types.Messagetype`.
+
+    :param jsonable: JSON-able structure to be parsed
+    :return: parsed literal
+    :raise: :py:class:`.DeserializationException` if unexpected :paramref:`jsonable`
+    """
+    if not isinstance(jsonable, str):
+        raise DeserializationException("Expected a str, but got: {type(jsonable)}")
+
+    literal = aas_stringification.messagetype_from_str(jsonable)
+    if literal is None:
+        raise DeserializationException(
+            f"Not a valid string representation of "
+            f"a literal of Messagetype: {jsonable}"
+        )
+
+    return literal
+
+
+class _SetterForMessage:
+    """Provide de-serialization-setters for properties."""
+
+    def __init__(self) -> None:
+        """Initialize with all the properties unset."""
+        self.code: Optional[str] = None
+        self.correlation_id: Optional[str] = None
+        self.message_type: Optional[aas_types.Messagetype] = None
+        self.text: Optional[str] = None
+        self.timestamp: Optional[str] = None
+
+    def ignore(self, jsonable: Jsonable) -> None:
+        """Ignore :paramref:`jsonable` and do not set anything."""
+        pass
+
+    def set_code_from_jsonable(self, jsonable: Jsonable) -> None:
+        """
+        Parse :paramref:`jsonable` as the value of :py:attr:`~code`.
+
+        :param jsonable: input to be parsed
+        """
+        self.code = _str_from_jsonable(jsonable)
+
+    def set_correlation_id_from_jsonable(self, jsonable: Jsonable) -> None:
+        """
+        Parse :paramref:`jsonable` as the value of :py:attr:`~correlation_id`.
+
+        :param jsonable: input to be parsed
+        """
+        self.correlation_id = _str_from_jsonable(jsonable)
+
+    def set_message_type_from_jsonable(self, jsonable: Jsonable) -> None:
+        """
+        Parse :paramref:`jsonable` as the value of :py:attr:`~message_type`.
+
+        :param jsonable: input to be parsed
+        """
+        self.message_type = messagetype_from_jsonable(jsonable)
+
+    def set_text_from_jsonable(self, jsonable: Jsonable) -> None:
+        """
+        Parse :paramref:`jsonable` as the value of :py:attr:`~text`.
+
+        :param jsonable: input to be parsed
+        """
+        self.text = _str_from_jsonable(jsonable)
+
+    def set_timestamp_from_jsonable(self, jsonable: Jsonable) -> None:
+        """
+        Parse :paramref:`jsonable` as the value of :py:attr:`~timestamp`.
+
+        :param jsonable: input to be parsed
+        """
+        self.timestamp = _str_from_jsonable(jsonable)
+
+
+def message_from_jsonable(jsonable: Jsonable) -> aas_types.Message:
+    """
+    Parse an instance of :py:class:`.types.Message` from the JSON-able
+    structure :paramref:`jsonable`.
+
+    :param jsonable: structure to be parsed
+    :return: Parsed instance of :py:class:`.types.Message`
+    :raise: :py:class:`DeserializationException` if unexpected :paramref:`jsonable`
+    """
+    if not isinstance(jsonable, collections.abc.Mapping):
+        raise DeserializationException(f"Expected a mapping, but got: {type(jsonable)}")
+
+    setter = _SetterForMessage()
+
+    for key, jsonable_value in jsonable.items():
+        setter_method = _SETTER_MAP_FOR_MESSAGE.get(key)
+        if setter_method is None:
+            raise DeserializationException(f"Unexpected property: {key}")
+
+        try:
+            setter_method(setter, jsonable_value)
+        except DeserializationException as exception:
+            exception.path._prepend(PropertySegment(jsonable_value, key))
+            raise exception
+
+    if setter.code is None:
+        raise DeserializationException("The required property 'code' is missing")
+
+    if setter.correlation_id is None:
+        raise DeserializationException(
+            "The required property 'correlationId' is missing"
+        )
+
+    if setter.message_type is None:
+        raise DeserializationException("The required property 'messageType' is missing")
+
+    if setter.text is None:
+        raise DeserializationException("The required property 'text' is missing")
+
+    if setter.timestamp is None:
+        raise DeserializationException("The required property 'timestamp' is missing")
+
+    return aas_types.Message(
+        setter.code,
+        setter.correlation_id,
+        setter.message_type,
+        setter.text,
+        setter.timestamp,
+    )
+
+
+class _SetterForResult:
+    """Provide de-serialization-setters for properties."""
+
+    def __init__(self) -> None:
+        """Initialize with all the properties unset."""
+        self.messages: Optional[List[aas_types.Message]] = None
+
+    def ignore(self, jsonable: Jsonable) -> None:
+        """Ignore :paramref:`jsonable` and do not set anything."""
+        pass
+
+    def set_messages_from_jsonable(self, jsonable: Jsonable) -> None:
+        """
+        Parse :paramref:`jsonable` as the value of :py:attr:`~messages`.
+
+        :param jsonable: input to be parsed
+        """
+        if not isinstance(jsonable, collections.abc.Iterable):
+            raise DeserializationException(
+                f"Expected an iterable, but got: {type(jsonable)}"
+            )
+
+        items: List[aas_types.Message] = []
+        for i, jsonable_item in enumerate(jsonable):
+            try:
+                item = message_from_jsonable(jsonable_item)
+            except DeserializationException as exception:
+                exception.path._prepend(IndexSegment(jsonable, i))
+                raise
+
+            items.append(item)
+
+        self.messages = items
+
+
+def result_from_jsonable(jsonable: Jsonable) -> aas_types.Result:
+    """
+    Parse an instance of :py:class:`.types.Result` from the JSON-able
+    structure :paramref:`jsonable`.
+
+    :param jsonable: structure to be parsed
+    :return: Parsed instance of :py:class:`.types.Result`
+    :raise: :py:class:`DeserializationException` if unexpected :paramref:`jsonable`
+    """
+    if not isinstance(jsonable, collections.abc.Mapping):
+        raise DeserializationException(f"Expected a mapping, but got: {type(jsonable)}")
+
+    setter = _SetterForResult()
+
+    for key, jsonable_value in jsonable.items():
+        setter_method = _SETTER_MAP_FOR_RESULT.get(key)
+        if setter_method is None:
+            raise DeserializationException(f"Unexpected property: {key}")
+
+        try:
+            setter_method(setter, jsonable_value)
+        except DeserializationException as exception:
+            exception.path._prepend(PropertySegment(jsonable_value, key))
+            raise exception
+
+    if setter.messages is None:
+        raise DeserializationException("The required property 'messages' is missing")
+
+    return aas_types.Result(setter.messages)
 
 
 _HAS_SEMANTICS_FROM_JSONABLE_DISPATCH: Mapping[
@@ -8194,7 +8393,7 @@ _PAGED_RESULT_FROM_JSONABLE_DISPATCH: Mapping[
     str, Callable[[Jsonable], aas_types.PagedResult]
 ] = {
     "PagedResult": _paged_result_from_jsonable_without_dispatch,
-    "GetShellResult": get_shell_result_from_jsonable,
+    "GetAssetAdministrationShellResult": get_asset_administration_shell_result_from_jsonable,
     "GetSubmodelResult": get_submodel_result_from_jsonable,
 }
 
@@ -8207,12 +8406,12 @@ _SETTER_MAP_FOR_PAGED_RESULT: Mapping[
 }
 
 
-_SETTER_MAP_FOR_GET_SHELL_RESULT: Mapping[
-    str, Callable[[_SetterForGetShellResult, Jsonable], None]
+_SETTER_MAP_FOR_GET_ASSET_ADMINISTRATION_SHELL_RESULT: Mapping[
+    str, Callable[[_SetterForGetAssetAdministrationShellResult, Jsonable], None]
 ] = {
-    "pagingMetadata": _SetterForGetShellResult.set_paging_metadata_from_jsonable,
-    "result": _SetterForGetShellResult.set_result_from_jsonable,
-    "modelType": _SetterForGetShellResult.ignore,
+    "pagingMetadata": _SetterForGetAssetAdministrationShellResult.set_paging_metadata_from_jsonable,
+    "result": _SetterForGetAssetAdministrationShellResult.set_result_from_jsonable,
+    "modelType": _SetterForGetAssetAdministrationShellResult.ignore,
 }
 
 
@@ -8222,6 +8421,22 @@ _SETTER_MAP_FOR_GET_SUBMODEL_RESULT: Mapping[
     "pagingMetadata": _SetterForGetSubmodelResult.set_paging_metadata_from_jsonable,
     "result": _SetterForGetSubmodelResult.set_result_from_jsonable,
     "modelType": _SetterForGetSubmodelResult.ignore,
+}
+
+
+_SETTER_MAP_FOR_MESSAGE: Mapping[str, Callable[[_SetterForMessage, Jsonable], None]] = {
+    "code": _SetterForMessage.set_code_from_jsonable,
+    "correlationId": _SetterForMessage.set_correlation_id_from_jsonable,
+    "messageType": _SetterForMessage.set_message_type_from_jsonable,
+    "text": _SetterForMessage.set_text_from_jsonable,
+    "timestamp": _SetterForMessage.set_timestamp_from_jsonable,
+    "modelType": _SetterForMessage.ignore,
+}
+
+
+_SETTER_MAP_FOR_RESULT: Mapping[str, Callable[[_SetterForResult, Jsonable], None]] = {
+    "messages": _SetterForResult.set_messages_from_jsonable,
+    "modelType": _SetterForResult.ignore,
 }
 
 
@@ -9505,8 +9720,8 @@ class _Serializer(aas_types.AbstractTransformer[MutableJsonable]):
 
         return jsonable
 
-    def transform_get_shell_result(
-        self, that: aas_types.GetShellResult
+    def transform_get_asset_administration_shell_result(
+        self, that: aas_types.GetAssetAdministrationShellResult
     ) -> MutableJsonable:
         """Serialize :paramref:`that` to a JSON-able representation."""
         jsonable: MutableMapping[str, MutableJsonable] = dict()
@@ -9526,6 +9741,31 @@ class _Serializer(aas_types.AbstractTransformer[MutableJsonable]):
         jsonable["pagingMetadata"] = self.transform(that.paging_metadata)
 
         jsonable["result"] = [self.transform(item) for item in that.result]
+
+        return jsonable
+
+    # noinspection PyMethodMayBeStatic
+    def transform_message(self, that: aas_types.Message) -> MutableJsonable:
+        """Serialize :paramref:`that` to a JSON-able representation."""
+        jsonable: MutableMapping[str, MutableJsonable] = dict()
+
+        jsonable["code"] = that.code
+
+        jsonable["correlationId"] = that.correlation_id
+
+        jsonable["messageType"] = that.message_type.value
+
+        jsonable["text"] = that.text
+
+        jsonable["timestamp"] = that.timestamp
+
+        return jsonable
+
+    def transform_result(self, that: aas_types.Result) -> MutableJsonable:
+        """Serialize :paramref:`that` to a JSON-able representation."""
+        jsonable: MutableMapping[str, MutableJsonable] = dict()
+
+        jsonable["messages"] = [self.transform(item) for item in that.messages]
 
         return jsonable
 

@@ -1,5 +1,5 @@
 """
-Handle data structures for the Asset Administration Shell (AAS) V3.0 over HTTP.
+Handle data structures for the HTTP API of the Asset Administration Shell (AAS) V3.0.
 
 Specifically, we provide additional data structures required for AAS API over HTTP.
 
@@ -4789,7 +4789,7 @@ class KeyTypes(enum.Enum):
 
     ANNOTATED_RELATIONSHIP_ELEMENT = "AnnotatedRelationshipElement"
 
-    ASSET_ADMINISTRATION_SHELL = "Asset_administration_shell"
+    ASSET_ADMINISTRATION_SHELL = "AssetAdministrationShell"
 
     BASIC_EVENT_ELEMENT = "BasicEventElement"
 
@@ -6054,7 +6054,7 @@ class PagedResult(Class):
         self.paging_metadata = paging_metadata
 
 
-class GetShellResult(PagedResult):
+class GetAssetAdministrationShellResult(PagedResult):
     """Represent the listing of asset administration shells."""
 
     result: List["AssetAdministrationShell"]
@@ -6088,17 +6088,17 @@ class GetShellResult(PagedResult):
 
     def accept(self, visitor: "AbstractVisitor") -> None:
         """Dispatch the :paramref:`visitor` on this instance."""
-        visitor.visit_get_shell_result(self)
+        visitor.visit_get_asset_administration_shell_result(self)
 
     def accept_with_context(
         self, visitor: "AbstractVisitorWithContext[ContextT]", context: ContextT
     ) -> None:
         """Dispatch the :paramref:`visitor` on this instance in :paramref:`context`."""
-        visitor.visit_get_shell_result_with_context(self, context)
+        visitor.visit_get_asset_administration_shell_result_with_context(self, context)
 
     def transform(self, transformer: "AbstractTransformer[T]") -> T:
         """Dispatch the :paramref:`transformer` on this instance."""
-        return transformer.transform_get_shell_result(self)
+        return transformer.transform_get_asset_administration_shell_result(self)
 
     def transform_with_context(
         self,
@@ -6108,7 +6108,9 @@ class GetShellResult(PagedResult):
         """
         Dispatch the :paramref:`transformer` on this instance in :paramref:`context`.
         """
-        return transformer.transform_get_shell_result_with_context(self, context)
+        return transformer.transform_get_asset_administration_shell_result_with_context(
+            self, context
+        )
 
     def __init__(
         self,
@@ -6182,6 +6184,156 @@ class GetSubmodelResult(PagedResult):
         """Initialize with the given values."""
         PagedResult.__init__(self, paging_metadata)
         self.result = result
+
+
+class Messagetype(enum.Enum):
+    """Enumerate the type of error messages."""
+
+    UNDEFINED = "Undefined"
+
+    INFO = "Info"
+
+    WARNING = "Warning"
+
+    ERROR = "Error"
+
+    EXCEPTION = "Exception"
+
+
+class Message(Class):
+    """Capture the error message returned by the server."""
+
+    code: str
+
+    correlation_id: str
+
+    message_type: "Messagetype"
+
+    text: str
+
+    timestamp: str
+
+    def descend_once(self) -> Iterator[Class]:
+        """
+        Iterate over the instances referenced from this instance.
+
+        We do not recurse into the referenced instance.
+
+        :yield: instances directly referenced from this instance
+        """
+        # No descendable properties
+        return
+        # For this uncommon return-yield construction, see:
+        # https://stackoverflow.com/questions/13243766/how-to-define-an-empty-generator-function
+        # noinspection PyUnreachableCode
+        yield
+
+    def descend(self) -> Iterator[Class]:
+        """
+        Iterate recursively over the instances referenced from this one.
+
+        :yield: instances recursively referenced from this instance
+        """
+        # No descendable properties
+        return
+        # For this uncommon return-yield construction, see:
+        # https://stackoverflow.com/questions/13243766/how-to-define-an-empty-generator-function
+        # noinspection PyUnreachableCode
+        yield
+
+    def accept(self, visitor: "AbstractVisitor") -> None:
+        """Dispatch the :paramref:`visitor` on this instance."""
+        visitor.visit_message(self)
+
+    def accept_with_context(
+        self, visitor: "AbstractVisitorWithContext[ContextT]", context: ContextT
+    ) -> None:
+        """Dispatch the :paramref:`visitor` on this instance in :paramref:`context`."""
+        visitor.visit_message_with_context(self, context)
+
+    def transform(self, transformer: "AbstractTransformer[T]") -> T:
+        """Dispatch the :paramref:`transformer` on this instance."""
+        return transformer.transform_message(self)
+
+    def transform_with_context(
+        self,
+        transformer: "AbstractTransformerWithContext[ContextT, T]",
+        context: ContextT,
+    ) -> T:
+        """
+        Dispatch the :paramref:`transformer` on this instance in :paramref:`context`.
+        """
+        return transformer.transform_message_with_context(self, context)
+
+    def __init__(
+        self,
+        code: str,
+        correlation_id: str,
+        message_type: "Messagetype",
+        text: str,
+        timestamp: str,
+    ) -> None:
+        """Initialize with the given values."""
+        self.code = code
+        self.correlation_id = correlation_id
+        self.message_type = message_type
+        self.text = text
+        self.timestamp = timestamp
+
+
+class Result(Class):
+    """Capture the server response in case of errors."""
+
+    messages: List["Message"]
+
+    def descend_once(self) -> Iterator[Class]:
+        """
+        Iterate over the instances referenced from this instance.
+
+        We do not recurse into the referenced instance.
+
+        :yield: instances directly referenced from this instance
+        """
+        yield from self.messages
+
+    def descend(self) -> Iterator[Class]:
+        """
+        Iterate recursively over the instances referenced from this one.
+
+        :yield: instances recursively referenced from this instance
+        """
+        for an_item in self.messages:
+            yield an_item
+
+            yield from an_item.descend()
+
+    def accept(self, visitor: "AbstractVisitor") -> None:
+        """Dispatch the :paramref:`visitor` on this instance."""
+        visitor.visit_result(self)
+
+    def accept_with_context(
+        self, visitor: "AbstractVisitorWithContext[ContextT]", context: ContextT
+    ) -> None:
+        """Dispatch the :paramref:`visitor` on this instance in :paramref:`context`."""
+        visitor.visit_result_with_context(self, context)
+
+    def transform(self, transformer: "AbstractTransformer[T]") -> T:
+        """Dispatch the :paramref:`transformer` on this instance."""
+        return transformer.transform_result(self)
+
+    def transform_with_context(
+        self,
+        transformer: "AbstractTransformerWithContext[ContextT, T]",
+        context: ContextT,
+    ) -> T:
+        """
+        Dispatch the :paramref:`transformer` on this instance in :paramref:`context`.
+        """
+        return transformer.transform_result_with_context(self, context)
+
+    def __init__(self, messages: List["Message"]) -> None:
+        """Initialize with the given values."""
+        self.messages = messages
 
 
 class AbstractVisitor:
@@ -6403,12 +6555,24 @@ class AbstractVisitor:
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def visit_get_shell_result(self, that: GetShellResult) -> None:
+    def visit_get_asset_administration_shell_result(
+        self, that: GetAssetAdministrationShellResult
+    ) -> None:
         """Visit :paramref:`that`."""
         raise NotImplementedError()
 
     @abc.abstractmethod
     def visit_get_submodel_result(self, that: GetSubmodelResult) -> None:
+        """Visit :paramref:`that`."""
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def visit_message(self, that: Message) -> None:
+        """Visit :paramref:`that`."""
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def visit_result(self, that: Result) -> None:
         """Visit :paramref:`that`."""
         raise NotImplementedError()
 
@@ -6666,8 +6830,8 @@ class AbstractVisitorWithContext(Generic[ContextT]):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def visit_get_shell_result_with_context(
-        self, that: GetShellResult, context: ContextT
+    def visit_get_asset_administration_shell_result_with_context(
+        self, that: GetAssetAdministrationShellResult, context: ContextT
     ) -> None:
         """Visit :paramref:`that` in :paramref:`context`."""
         raise NotImplementedError()
@@ -6676,6 +6840,16 @@ class AbstractVisitorWithContext(Generic[ContextT]):
     def visit_get_submodel_result_with_context(
         self, that: GetSubmodelResult, context: ContextT
     ) -> None:
+        """Visit :paramref:`that` in :paramref:`context`."""
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def visit_message_with_context(self, that: Message, context: ContextT) -> None:
+        """Visit :paramref:`that` in :paramref:`context`."""
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def visit_result_with_context(self, that: Result, context: ContextT) -> None:
         """Visit :paramref:`that` in :paramref:`context`."""
         raise NotImplementedError()
 
@@ -6903,12 +7077,24 @@ class PassThroughVisitor(AbstractVisitor):
         for another in that.descend_once():
             self.visit(another)
 
-    def visit_get_shell_result(self, that: GetShellResult) -> None:
+    def visit_get_asset_administration_shell_result(
+        self, that: GetAssetAdministrationShellResult
+    ) -> None:
         """Visit :paramref:`that`."""
         for another in that.descend_once():
             self.visit(another)
 
     def visit_get_submodel_result(self, that: GetSubmodelResult) -> None:
+        """Visit :paramref:`that`."""
+        for another in that.descend_once():
+            self.visit(another)
+
+    def visit_message(self, that: Message) -> None:
+        """Visit :paramref:`that`."""
+        for another in that.descend_once():
+            self.visit(another)
+
+    def visit_result(self, that: Result) -> None:
         """Visit :paramref:`that`."""
         for another in that.descend_once():
             self.visit(another)
@@ -7171,8 +7357,8 @@ class PassThroughVisitorWithContext(AbstractVisitorWithContext[ContextT]):
         for another in that.descend_once():
             self.visit_with_context(another, context)
 
-    def visit_get_shell_result_with_context(
-        self, that: GetShellResult, context: ContextT
+    def visit_get_asset_administration_shell_result_with_context(
+        self, that: GetAssetAdministrationShellResult, context: ContextT
     ) -> None:
         """Visit :paramref:`that` in :paramref:`context`."""
         for another in that.descend_once():
@@ -7181,6 +7367,16 @@ class PassThroughVisitorWithContext(AbstractVisitorWithContext[ContextT]):
     def visit_get_submodel_result_with_context(
         self, that: GetSubmodelResult, context: ContextT
     ) -> None:
+        """Visit :paramref:`that` in :paramref:`context`."""
+        for another in that.descend_once():
+            self.visit_with_context(another, context)
+
+    def visit_message_with_context(self, that: Message, context: ContextT) -> None:
+        """Visit :paramref:`that` in :paramref:`context`."""
+        for another in that.descend_once():
+            self.visit_with_context(another, context)
+
+    def visit_result_with_context(self, that: Result, context: ContextT) -> None:
         """Visit :paramref:`that` in :paramref:`context`."""
         for another in that.descend_once():
             self.visit_with_context(another, context)
@@ -7407,12 +7603,24 @@ class AbstractTransformer(Generic[T]):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def transform_get_shell_result(self, that: GetShellResult) -> T:
+    def transform_get_asset_administration_shell_result(
+        self, that: GetAssetAdministrationShellResult
+    ) -> T:
         """Transform :paramref:`that`."""
         raise NotImplementedError()
 
     @abc.abstractmethod
     def transform_get_submodel_result(self, that: GetSubmodelResult) -> T:
+        """Transform :paramref:`that`."""
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def transform_message(self, that: Message) -> T:
+        """Transform :paramref:`that`."""
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def transform_result(self, that: Result) -> T:
         """Transform :paramref:`that`."""
         raise NotImplementedError()
 
@@ -7674,8 +7882,8 @@ class AbstractTransformerWithContext(Generic[ContextT, T]):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def transform_get_shell_result_with_context(
-        self, that: GetShellResult, context: ContextT
+    def transform_get_asset_administration_shell_result_with_context(
+        self, that: GetAssetAdministrationShellResult, context: ContextT
     ) -> T:
         """Transform :paramref:`that` in :paramref:`context`."""
         raise NotImplementedError()
@@ -7684,6 +7892,16 @@ class AbstractTransformerWithContext(Generic[ContextT, T]):
     def transform_get_submodel_result_with_context(
         self, that: GetSubmodelResult, context: ContextT
     ) -> T:
+        """Transform :paramref:`that` in :paramref:`context`."""
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def transform_message_with_context(self, that: Message, context: ContextT) -> T:
+        """Transform :paramref:`that` in :paramref:`context`."""
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def transform_result_with_context(self, that: Result, context: ContextT) -> T:
         """Transform :paramref:`that` in :paramref:`context`."""
         raise NotImplementedError()
 
@@ -7881,11 +8099,21 @@ class TransformerWithDefault(AbstractTransformer[T]):
         """Transform :paramref:`that`."""
         return self.default
 
-    def transform_get_shell_result(self, that: GetShellResult) -> T:
+    def transform_get_asset_administration_shell_result(
+        self, that: GetAssetAdministrationShellResult
+    ) -> T:
         """Transform :paramref:`that`."""
         return self.default
 
     def transform_get_submodel_result(self, that: GetSubmodelResult) -> T:
+        """Transform :paramref:`that`."""
+        return self.default
+
+    def transform_message(self, that: Message) -> T:
+        """Transform :paramref:`that`."""
+        return self.default
+
+    def transform_result(self, that: Result) -> T:
         """Transform :paramref:`that`."""
         return self.default
 
@@ -8119,8 +8347,8 @@ class TransformerWithDefaultAndContext(AbstractTransformerWithContext[ContextT, 
         """Transform :paramref:`that` in :paramref:`context`."""
         return self.default
 
-    def transform_get_shell_result_with_context(
-        self, that: GetShellResult, context: ContextT
+    def transform_get_asset_administration_shell_result_with_context(
+        self, that: GetAssetAdministrationShellResult, context: ContextT
     ) -> T:
         """Transform :paramref:`that` in :paramref:`context`."""
         return self.default
@@ -8128,6 +8356,14 @@ class TransformerWithDefaultAndContext(AbstractTransformerWithContext[ContextT, 
     def transform_get_submodel_result_with_context(
         self, that: GetSubmodelResult, context: ContextT
     ) -> T:
+        """Transform :paramref:`that` in :paramref:`context`."""
+        return self.default
+
+    def transform_message_with_context(self, that: Message, context: ContextT) -> T:
+        """Transform :paramref:`that` in :paramref:`context`."""
+        return self.default
+
+    def transform_result_with_context(self, that: Result, context: ContextT) -> T:
         """Transform :paramref:`that` in :paramref:`context`."""
         return self.default
 
