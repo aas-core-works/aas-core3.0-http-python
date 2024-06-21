@@ -17,7 +17,7 @@ with open(os.path.join(here, "README.rst"), encoding="utf-8") as fid:
     long_description = fid.read()
 
 setup(
-    name="aas-core3.0-python",
+    name="aas-core3.0-http-python",
     # Synchronize with __init__.py and changelog.rst!
     version="0.0.1",
     description="Handle data structures for the HTTP API of the Asset Administration Shell (AAS) V3.0.",
