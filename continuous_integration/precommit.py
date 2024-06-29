@@ -149,6 +149,10 @@ def main() -> int:
                 "--strict",
                 "--config-file",
                 str(config_file),
+                "--exclude",
+                "dev_scripts/codegen/snippets/",
+                "--exclude",
+                "dev_scripts/codegen/meta_model.py",
             ]
             + mypy_targets,
             cwd=repo_root,
@@ -170,7 +174,15 @@ def main() -> int:
 
         exit_code = call_and_report(
             verb="pylint",
-            cmd=[sys.executable, "-m", "pylint", f"--rcfile={rcfile}"] + pylint_targets,
+            cmd=[
+                sys.executable,
+                "-m",
+                "pylint",
+                f"--rcfile={rcfile}",
+                "--ignore-paths",
+                "dev_scripts/codegen/meta_model.py",
+            ]
+            + pylint_targets,
             cwd=repo_root,
         )
         if exit_code != 0:

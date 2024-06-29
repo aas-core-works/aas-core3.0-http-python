@@ -4,6 +4,7 @@ See:
 https://packaging.python.org/en/latest/distributing.html
 https://github.com/pypa/sampleproject
 """
+
 import os
 import sys
 
@@ -38,7 +39,6 @@ setup(
     keywords="asset administration shell sdk industry 4.0 industrie i4.0 industry iot iiot",
     packages=find_packages(exclude=["tests", "continuous_integration", "dev_scripts"]),
     install_requires=[] if sys.version_info >= (3, 8) else ["typing_extensions"],
-
     py_modules=["aas_core3_http"],
     package_data={"aas_core3_http": ["py.typed"]},
 )

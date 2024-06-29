@@ -6,6 +6,7 @@ import pathlib
 import subprocess
 import sys
 
+
 def generate() -> None:
     """Generate the code."""
     this_dir = pathlib.Path(os.path.realpath(__file__)).parent
@@ -25,12 +26,13 @@ def generate() -> None:
         "--output_dir",
         str(target_dir),
         "--target",
-        "python"
+        "python",
     ]
 
     subprocess.check_call(cmd, cwd=str(this_dir))
 
     subprocess.check_call(["black", str(target_dir), "--quiet"])
+
 
 def main() -> int:
     """Execute the main routine."""
